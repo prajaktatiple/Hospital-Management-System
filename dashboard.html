@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Dashboard{% endblock %}{% block sub %}Welcome back, Admin · Hospital overview{% endblock %}
+{% block body %}
+<div class="card hero"><h2>Quality care, managed simply.</h2><p>Track patients, doctors, appointments and billing from one place.</p></div>
+<div class="grid">
+<div class="card stat a"><small>Total Patients</small><b>{{ s.patients }}</b></div>
+<div class="card stat b"><small>Doctors</small><b>{{ s.doctors }}</b></div>
+<div class="card stat c"><small>Revenue Collected</small><b>₹{{ '{:,}'.format(s.revenue) }}</b></div>
+<div class="card stat d"><small>Pending Bills</small><b>₹{{ '{:,}'.format(s.pending) }}</b></div></div>
+<div class="cols">
+<div class="card"><h3>Upcoming Appointments ({{ s.appts }})</h3><div class="tw"><table><tr><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th></tr>
+{% for a in upcoming %}<tr><td>{{ a.pname }}</td><td>{{ a.dname }}<br><small style="color:var(--mute)">{{ a.sp }}</small></td><td>{{ a.date }}</td><td>{{ a.time }}</td></tr>{% endfor %}</table></div></div>
+<div class="card"><h3>Recent Patients</h3>{% for p in recent %}<div style="display:flex;align-items:center;padding:9px 0"><span class="av">{{ p.name[0] }}</span><div>{{ p.name }}<br><small style="color:var(--mute)">{{ p.disease }}</small></div></div>{% endfor %}
+<a class="btn sm" href="{{ url_for('patients') }}">Register patient</a></div></div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Appointments{% endblock %}{% block sub %}Book and track visits{% endblock %}
+{% block body %}
+<div class="card mb"><h3>Book Appointment</h3><form method="post" class="form">
+<div><label>Patient</label><select name="patient_id">{% for p in pts %}<option value="{{ p.id }}">{{ p.name }}</option>{% endfor %}</select></div>
+<div><label>Doctor</label><select name="doctor_id">{% for d in drs %}<option value="{{ d.id }}">{{ d.name }} — {{ d.specialization }}</option>{% endfor %}</select></div>
+<div><label>Date</label><input type="date" name="date" required></div><div><label>Time</label><input type="time" name="time" required></div><button class="btn">Book</button></form></div>
+<div class="card"><h3>All Appointments</h3><div class="tw"><table><tr><th>#</th><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Status</th></tr>
+{% for a in rows %}<tr><td>{{ a.id }}</td><td>{{ a.pname }}</td><td>{{ a.dname }}</td><td>{{ a.date }}</td><td>{{ a.time }}</td><td><span class="tag {{ a.status }}">{{ a.status }}</span></td></tr>{% endfor %}</table></div></div>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}Doctors{% endblock %}{% block sub %}Manage medical staff{% endblock %}
+{% block body %}
+<div class="dgrid">{% for d in rows %}<div class="card dcard"><span class="av">{{ d.name[4] }}</span><h4>{{ d.name }}</h4><p>{{ d.specialization }}</p><p>📞 {{ d.phone }}</p><p>🕒 {{ d.available }}</p><span class="tag Scheduled">Fee ₹{{ d.fee }}</span></div>{% endfor %}</div>
+<div class="card"><h3>Add Doctor</h3><form method="post" class="form"><div><label>Name</label><input name="name" required></div><div><label>Specialization</label><input name="specialization" required></div>
+<div><label>Phone</label><input name="phone"></div><div><label>Availability</label><input name="available" value="Mon - Fri"></div><div><label>Fee (₹)</label><input name="fee" type="number" value="500"></div><button class="btn">Add</button></form></div>
+{% endblock %}

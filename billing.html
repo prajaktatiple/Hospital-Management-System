@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Billing & Payments{% endblock %}{% block sub %}Invoices and payment status{% endblock %}
+{% block body %}
+<div class="card mb"><h3>Generate Bill</h3><form method="post" class="form"><div><label>Patient</label><select name="patient_id">{% for p in pts %}<option value="{{ p.id }}">{{ p.name }}</option>{% endfor %}</select></div>
+<div><label>Description</label><input name="description" required></div><div><label>Amount (₹)</label><input name="amount" type="number" required></div><button class="btn">Generate</button></form></div>
+<div class="card"><h3>Invoices</h3><div class="tw"><table><tr><th>Bill</th><th>Patient</th><th>Description</th><th>Date</th><th>Amount</th><th>Status</th><th></th></tr>
+{% for b in rows %}<tr><td>INV-{{ '%03d'|format(b.id) }}</td><td>{{ b.pname }}</td><td>{{ b.description }}</td><td>{{ b.date }}</td><td>₹{{ '{:,}'.format(b.amount) }}</td><td><span class="tag {{ b.status }}">{{ b.status }}</span></td>
+<td>{% if b.status=='Pending' %}<a class="btn sm" href="{{ url_for('pay', i=b.id) }}">Mark paid</a>{% endif %}</td></tr>{% endfor %}</table></div></div>
+{% endblock %}

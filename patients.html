@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}Patients{% endblock %}{% block sub %}Registration & patient records{% endblock %}
+{% block body %}
+<div class="card mb"><h3>Register New Patient</h3><form method="post" class="form">
+<div><label>Full name</label><input name="name" required></div><div><label>Age</label><input name="age" type="number" required></div>
+<div><label>Gender</label><select name="gender"><option>Male</option><option>Female</option><option>Other</option></select></div>
+<div><label>Phone</label><input name="phone" required></div><div><label>Address</label><input name="address"></div>
+<div><label>Condition</label><input name="disease"></div><button class="btn">Register</button></form></div>
+<div class="card"><h3>All Patients ({{ rows|length }})</h3><div class="tw"><table><tr><th>ID</th><th>Name</th><th>Age/Sex</th><th>Phone</th><th>Condition</th><th>Admitted</th></tr>
+{% for p in rows %}<tr><td>#{{ p.id }}</td><td><span class="av">{{ p.name[0] }}</span>{{ p.name }}</td><td>{{ p.age }} / {{ p.gender[0] }}</td><td>{{ p.phone }}</td><td>{{ p.disease }}</td><td>{{ p.admitted }}</td></tr>{% endfor %}</table></div></div>
+{% endblock %}

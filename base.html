@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MediCare HMS</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<aside><div class="logo"><i>+</i>MediCare HMS</div>
+{% for k,l in [('dashboard','🏠 Dashboard'),('patients','🧑 Patients'),('doctors','🩺 Doctors'),('appointments','📅 Appointments'),('billing','💳 Billing')] %}
+<a class="{{ 'active' if page==k }}" href="{{ url_for(k) }}">{{ l }}</a>{% endfor %}</aside>
+<main>
+<div class="top"><div><h1>{% block title %}{% endblock %}</h1><p>{% block sub %}{% endblock %}</p></div>
+<div class="tools"><form action="{{ url_for('search') }}"><input name="q" placeholder="Search patients, doctors…" value="{{ q or '' }}"><button class="btn">Search</button></form>
+<button class="btn ghost" onclick="document.body.classList.toggle('light')">🌓</button></div></div>
+{% with m = get_flashed_messages() %}{% for x in m %}<div class="flash">✔ {{ x }}</div>{% endfor %}{% endwith %}
+{% block body %}{% endblock %}
+</main></body></html>

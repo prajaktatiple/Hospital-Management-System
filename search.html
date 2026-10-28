@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Search results{% endblock %}{% block sub %}“{{ q }}” — {{ pts|length }} patients, {{ drs|length }} doctors{% endblock %}
+{% block body %}
+<div class="card mb"><h3>Patients</h3><div class="tw"><table><tr><th>Name</th><th>Phone</th><th>Condition</th></tr>{% for p in pts %}<tr><td>{{ p.name }}</td><td>{{ p.phone }}</td><td>{{ p.disease }}</td></tr>{% else %}<tr><td>No matches</td></tr>{% endfor %}</table></div></div>
+<div class="card"><h3>Doctors</h3><div class="tw"><table><tr><th>Name</th><th>Specialization</th><th>Availability</th></tr>{% for d in drs %}<tr><td>{{ d.name }}</td><td>{{ d.specialization }}</td><td>{{ d.available }}</td></tr>{% else %}<tr><td>No matches</td></tr>{% endfor %}</table></div></div>
+{% endblock %}
